@@ -2,20 +2,28 @@ package com.company.frontalsystem;
 
 import com.company.application.Application;
 
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class FrontalSystem {
 
-    private Queue<Application> applicationQueue;
+    private final ArrayDeque<Application> applicationQueue = new ArrayDeque<>(2);
 
 
-    public void addApplication(Application application){
+    public synchronized void addApplication(Application application) throws InterruptedException {
+        while (applicationQueue.size() >= 2) {
+            wait();
+        }
         applicationQueue.add(application);
+        notifyAll();
     }
 
-    public Application getApplication(){
-        var application = applicationQueue.poll();
-
+    public synchronized Application getApplication() throws InterruptedException {
+        while (applicationQueue.isEmpty()) {
+            wait();
+        }
+        Application application = applicationQueue.poll();
+        notifyAll();
         return application;
     }
 

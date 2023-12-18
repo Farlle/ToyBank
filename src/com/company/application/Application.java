@@ -4,29 +4,37 @@ public class Application {
 
     private String nameClient;
     private long sum;
-    private String typeOperation;
+    private Operation typeOperation;
+
+    public Application(String nameClient, long sum, Operation typeOperation ){
+        this.nameClient = nameClient;
+        this.sum = sum;
+        this.typeOperation = typeOperation;
+    }
+
 
     public String getNameClient() {
         return nameClient;
-    }
-
-    public void setNameClient(String nameClient) {
-        this.nameClient = nameClient;
     }
 
     public long getSum() {
         return sum;
     }
 
-    public void setSum(long sum) {
-        this.sum = sum;
-    }
-
-    public String getTypeOperation() {
+    public Operation getTypeOperation() {
         return typeOperation;
     }
 
-    public void setTypeOperation(String typeOperation) {
-        this.typeOperation = typeOperation;
+
+    @Override
+    public String toString() {
+        return "Application{" +
+                "nameClient='" + nameClient + '\'' +
+                ", sum=" + sum +
+                ", typeOperation=" + typeOperation +
+                '}';
     }
+
+
+
 }
