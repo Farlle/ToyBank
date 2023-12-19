@@ -35,7 +35,7 @@ public class BackendSystem {
 
     public synchronized void increaseBalance(Application application, String nameApplication) {
         long amount = application.getSum();
-        while (balance - amount < 0) {
+        while (balance < amount) {
             System.out.printf("БЭК система: Заявка %s от %s не обработана. Баланс банка = %d\n",
                     application, nameApplication, balance);
             return;
