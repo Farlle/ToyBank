@@ -26,7 +26,7 @@ public class BackendSystem {
     public void decreaseBalance(Application application, String nameApplication) {
         balance.getAndUpdate((x) -> x + application.getSum());
         System.out.printf("БЭК система: Заявка %s от %s обработана. Баланс банка = %d\n",
-                application, nameApplication, balance);
+                application, nameApplication, balance.get());
     }
 
 
@@ -34,12 +34,12 @@ public class BackendSystem {
         long amount = application.getSum();
         while (balance.get() < amount) {
             System.out.printf("БЭК система: Заявка %s от %s не обработана. Баланс банка = %d\n",
-                    application, nameApplication, balance);
+                    application, nameApplication, balance.get());
             return;
         }
         balance.getAndUpdate((x) -> x - application.getSum());
         System.out.printf("БЭК система: Заявка %s от %s обработана. Баланс банка = %d\n",
-                application, nameApplication, balance);
+                application, nameApplication, balance.get());
     }
 
 }

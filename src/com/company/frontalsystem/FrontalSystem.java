@@ -12,7 +12,7 @@ public class FrontalSystem {
 
     /*
     * Используем блоктрующую очередь, так как нам необходимо приостанавливать выполнение потока,
-    *  при пустой или переполненной очереди
+    *  при пустой или переполненной очереди, take() имеет проверку на пустоту
     */
     private final BlockingQueue<Application> applicationQueue = new ArrayBlockingQueue<>(2);
 
@@ -21,8 +21,7 @@ public class FrontalSystem {
     }
 
     public Application getApplication() throws InterruptedException {
-        Application application = applicationQueue.take();
-        return application;
+        return applicationQueue.take();
     }
 
 }
