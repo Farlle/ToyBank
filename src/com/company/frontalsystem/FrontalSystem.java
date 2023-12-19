@@ -8,10 +8,10 @@ import java.util.concurrent.BlockingQueue;
 public class FrontalSystem {
 
     /*
-    * Используем блокирующую очередь, так как нам необходимо приостанавливать выполнение потока,
+    * Используем блокирующую очередь, так как нам необходимо приостанавливать выполнение потока
     *  при пустой или переполненной очереди; take() имеет проверку на пустоту
     */
-    private final BlockingQueue<Application> applicationQueue = new ArrayBlockingQueue<>(2);
+    private final ArrayBlockingQueue<Application> applicationQueue = new ArrayBlockingQueue<>(2);
 
     public void addApplication(Application application) throws InterruptedException {
          applicationQueue.put(application);
