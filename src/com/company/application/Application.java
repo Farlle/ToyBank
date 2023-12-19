@@ -17,6 +17,8 @@ public class Application {
         return nameClient;
     }
 
+
+
     public long getSum() {
         return sum;
     }

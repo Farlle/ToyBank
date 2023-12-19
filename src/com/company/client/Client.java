@@ -23,7 +23,8 @@ public class Client implements Runnable {
         try {
             System.out.printf("%s: Заявка %s отправлена в банк%n", name, application);
             frontalSystem.addApplication(application);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

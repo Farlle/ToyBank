@@ -17,27 +17,22 @@ public class BackendSystem {
     public void applicationProcessor(Application application, String nameApplication) {
         Operation operationType = application.getTypeOperation();
         switch (operationType) {
-            case INCREASE: {
-                increaseBalance(application, nameApplication);
-                break;
-            }
-            case DECREASE: {
-                decreaseBalance(application, nameApplication);
-                break;
-            }
+            case INCREASE -> increaseBalance(application, nameApplication);
+            case DECREASE -> decreaseBalance(application, nameApplication);
+            default -> throw new IllegalStateException("Unexpected value: " + operationType);
         }
     }
 
-    public synchronized void decreaseBalance(Application application, String nameApplication) {
+    public void decreaseBalance(Application application, String nameApplication) {
         balance.getAndUpdate((x) -> x + application.getSum());
         System.out.printf("БЭК система: Заявка %s от %s обработана. Баланс банка = %d\n",
                 application, nameApplication, balance);
     }
 
 
-    public synchronized void increaseBalance(Application application, String nameApplication) {
+    public void increaseBalance(Application application, String nameApplication) {
         long amount = application.getSum();
-        while (balance.get() > amount) {
+        while (balance.get() < amount) {
             System.out.printf("БЭК система: Заявка %s от %s не обработана. Баланс банка = %d\n",
                     application, nameApplication, balance);
             return;

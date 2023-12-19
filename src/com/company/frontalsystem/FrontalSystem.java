@@ -4,28 +4,25 @@ import com.company.application.Application;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
 
 public class FrontalSystem {
 
-    private final ArrayDeque<Application> applicationQueue = new ArrayDeque<>(2);
+    /*
+    * Используем блоктрующую очередь, так как нам необходимо приостанавливать выполнение потока,
+    *  при пустой или переполненной очереди
+    */
+    private final BlockingQueue<Application> applicationQueue = new ArrayBlockingQueue<>(2);
 
-
-    public synchronized void addApplication(Application application) throws InterruptedException {
-        while (applicationQueue.size() >= 2) {
-            wait();
-        }
-        applicationQueue.add(application);
-        notifyAll();
+    public void addApplication(Application application) throws InterruptedException {
+         applicationQueue.put(application);
     }
 
-    public synchronized Application getApplication() throws InterruptedException {
-        while (applicationQueue.isEmpty()) {
-            wait();
-        }
-        Application application = applicationQueue.poll();
-        notifyAll();
+    public Application getApplication() throws InterruptedException {
+        Application application = applicationQueue.take();
         return application;
     }
-
 
 }
