@@ -9,11 +9,6 @@ public class BackendSystem {
 
     private AtomicLong balance = new AtomicLong();
 
-    public BackendSystem(long balance) {
-        this.balance.getAndUpdate((x) -> balance + x);
-    }
-
-
     public void applicationProcessor(Application application, String nameApplication) {
         Operation operationType = application.getTypeOperation();
         switch (operationType) {
@@ -29,7 +24,6 @@ public class BackendSystem {
                 application, nameApplication, balance.get());
     }
 
-
     public void increaseBalance(Application application, String nameApplication) {
         long amount = application.getSum();
         while (balance.get() < amount) {
@@ -42,4 +36,8 @@ public class BackendSystem {
                 application, nameApplication, balance.get());
     }
 
+    public void setBalance(int balance) {
+        this.balance.updateAndGet((x) -> x + balance);
+        System.out.printf("Задан новый баланс банка. Баланс = %d\n", this.balance.get());
+    }
 }

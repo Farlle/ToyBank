@@ -2,7 +2,6 @@ package com.company.client;
 
 
 import com.company.application.Application;
-import com.company.applicationprocessor.ApplicationProcessor;
 import com.company.frontalsystem.FrontalSystem;
 
 public class Client implements Runnable {

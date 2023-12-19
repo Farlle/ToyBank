@@ -12,12 +12,9 @@ public class Application {
         this.typeOperation = typeOperation;
     }
 
-
     public String getNameClient() {
         return nameClient;
     }
-
-
 
     public long getSum() {
         return sum;
@@ -27,7 +24,6 @@ public class Application {
         return typeOperation;
     }
 
-
     @Override
     public String toString() {
         return "Application{" +
@@ -36,7 +32,5 @@ public class Application {
                 ", typeOperation=" + typeOperation +
                 '}';
     }
-
-
 
 }
